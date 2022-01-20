@@ -15,9 +15,9 @@ class Trip(models.Model):
 
 
 class Driver(models.Model):
+    surname = models.CharField(verbose_name="Фамилия", max_length=100)
     name = models.CharField(verbose_name="Имя", max_length=100)
     second_name = models.CharField(verbose_name="Отчество", max_length=100)
-    surname = models.CharField(verbose_name="Фамилия", max_length=100)
     passport_ser = models.CharField(verbose_name="Серия паспорта", max_length=10)
     passport_no = models.CharField(verbose_name="Номер паспорта", max_length=10)
     passport_issued = models.CharField(verbose_name="Паспорт кем выдан", max_length=150)
