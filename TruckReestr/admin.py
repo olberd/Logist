@@ -7,6 +7,9 @@ from TruckReestr.models import Trip, Driver, Truck
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
     list_display = ('trip_date', 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
+    search_fields = ('trip_date', 'driver', 'truck',)
+    list_editable = ( 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
+
 
 @admin.register(Driver)
 class DriverAdmin(admin.ModelAdmin):

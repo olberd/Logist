@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 
 
 class Trip(models.Model):
@@ -12,6 +13,14 @@ class Trip(models.Model):
     trip_cost = models.DecimalField(verbose_name="Цена рейса", max_digits=10, decimal_places=2)
     driver = models.ForeignKey("Driver", on_delete=models.CASCADE)
     truck = models.ForeignKey("Truck", on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('post', kwargs={'post_id: self.pk'})
+
+    class Meta:
+        verbose_name = 'Рейс'
+        verbose_name_plural = 'Рейсы'
+        ordering = ['-trip_date', 'trip_time']
 
 
 class Driver(models.Model):
@@ -31,6 +40,10 @@ class Driver(models.Model):
     def __str__(self):
         return f"{self.surname} {self.name}"
 
+    class Meta:
+        verbose_name = 'Водитель'
+        verbose_name_plural = 'Водители'
+
 
 class Truck(models.Model):
     number_auto = models.CharField(max_length=20, verbose_name="Номер машины")
@@ -39,3 +52,7 @@ class Truck(models.Model):
 
     def __str__(self):
         return self.number_auto
+
+    class Meta:
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машины'
