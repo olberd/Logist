@@ -21,7 +21,7 @@ class Driver(models.Model):
     passport_ser = models.CharField(verbose_name="Серия паспорта", max_length=10)
     passport_no = models.CharField(verbose_name="Номер паспорта", max_length=10)
     passport_issued = models.CharField(verbose_name="Паспорт кем выдан", max_length=150)
-    passport_date = models.DateField(verbose_name="Паспорт дата выдачи")
+    passport_date = models.DateField(verbose_name="дата выдачи")
     driver_license_ser = models.CharField(verbose_name="Серия ву", max_length=10)
     driver_license_no = models.CharField(verbose_name="Номер ву", max_length=20)
     driver_license_date = models.DateField(verbose_name="Дата ву")
