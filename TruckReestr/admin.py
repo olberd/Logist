@@ -8,7 +8,7 @@ from TruckReestr.models import Trip, Driver, Truck
 class TripAdmin(admin.ModelAdmin):
     list_display = ('trip_date', 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
     search_fields = ('trip_date', 'driver', 'truck',)
-    list_editable = ( 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
+    # list_editable = ( 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
 
 
 @admin.register(Driver)
@@ -16,7 +16,7 @@ class DriverAdmin(admin.ModelAdmin):
     fields = ('surname', 'name', 'second_name', 'passport_ser', 'passport_no', 'passport_issued', 'passport_date',
               'driver_license_ser', 'driver_license_no', 'driver_license_date', 'phone', 'number_auto')
     list_display = ('surname', 'name', 'second_name', 'passport_ser', 'passport_no', 'passport_issued', 'passport_date',
-              'driver_license_ser', 'driver_license_no', 'driver_license_date', 'phone', 'number_auto')
+                    'driver_license_ser', 'driver_license_no', 'driver_license_date', 'phone', 'number_auto')
 
 
 # admin.site.register(Trip)

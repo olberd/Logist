@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <h2>Рейсы</h2>
+    <ul>
+        {% for trip in trips %}
+            <li>{{ trip.trip_to }} {{ trip.trip_cost }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+</body>
+</html>

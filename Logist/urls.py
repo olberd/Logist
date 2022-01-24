@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
+from TruckReestr.views import AboutView, MyView, TripsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('about/', MyView.as_view()),
+    path('about2/', AboutView.as_view()),
+    path('trips/', TripsListView.as_view()),
+
 ]

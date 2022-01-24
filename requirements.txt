@@ -1,0 +1,9 @@
+asgiref==3.4.1
+colorama==0.4.4
+Django==4.0
+fake2db==0.5.4
+Faker==0.7.11
+python-dateutil==2.8.2
+six==1.16.0
+sqlparse==0.4.2
+tzdata==2021.5
