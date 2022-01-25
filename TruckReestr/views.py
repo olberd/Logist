@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
 from TruckReestr.models import Trip
 
 
@@ -22,3 +22,10 @@ class TripsListView(ListView):
     context_object_name = 'trips'
 
 
+class TripCreate(CreateView):
+    model = Trip
+    fields = ['trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', 'trip_cost', 'driver', 'truck',]
+
+
+class TripDetailView(DetailView):
+    model = Trip

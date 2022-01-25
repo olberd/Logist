@@ -15,7 +15,7 @@ class Trip(models.Model):
     truck = models.ForeignKey("Truck", on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_id: self.pk'})
+        return reverse('TripDetailView', args=[str(self.id)])  # kwargs={'id: self.pk'})
 
     class Meta:
         verbose_name = 'Рейс'

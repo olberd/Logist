@@ -2,16 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Title</title>
 </head>
 <body>
 {% block content %}
+    <div class="container-fluid">
     <h2>Рейсы</h2>
-    <ul>
-        {% for trip in trips %}
-            <li>{{ trip.trip_to }} {{ trip.trip_cost }}</li>
-        {% endfor %}
-    </ul>
+
+    <table class="table table-bordered table-hover table-sm table-striped border-primary">
+        <thead>
+    <tr >
+      <th scope="col">Дата погрузки</th>
+      <th scope="col">Время подачи</th>
+      <th scope="col">Место погрузки</th>
+      <th scope="col">Место выгрузки</th>
+      <th scope="col">Вид ТС</th>
+      <th scope="col">Цена рейса</th>
+    </tr>
+  </thead>
+        <tbody>
+    {% for trip in trips %}
+    <tr>
+      <th scope="row">{{ trip.trip_date }}</th>
+      <td>{{ trip.trip_time }}</td>
+      <td>{{ trip.trip_from }}</td>
+      <td>{{ trip.trip_to}}</td>
+      <td>{{ trip.type_auto}}</td>
+      <td>{{ trip.trip_cost}}</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+    </div>
 {% endblock %}
 </body>
 </html>
