@@ -18,6 +18,7 @@ class MyView(View):
 
 
 class TripsListView(ListView):
+    paginate_by = 20
     model = Trip
     context_object_name = 'trips'
 
