@@ -5,7 +5,8 @@
     <title>Рейс</title>
 </head>
 <body>
-<h1>{{ object.trip_date }}</h1>
+<h1> <a href="{% url 'trips' %}">Рейсы</a> </h1>
+<p>{{ object.trip_date }}</p>
 <p>{{ object.trip_time }}</p>
 <p>{{ object.trip_from }}</p>
 <p>{{ object.trip_to }}</p>

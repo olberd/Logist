@@ -15,7 +15,7 @@ class Trip(models.Model):
     truck = models.ForeignKey("Truck", on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return reverse('TripDetailView', args=[str(self.id)])  # kwargs={'id: self.pk'})
+        return reverse('TripDetailView', args=[self.id]) # args=[self.id]) #kwargs={'id': self.pk})
 
     class Meta:
         verbose_name = 'Рейс'
@@ -34,7 +34,7 @@ class Driver(models.Model):
     driver_license_ser = models.CharField(verbose_name="Серия ву", max_length=10, blank=True)
     driver_license_no = models.CharField(verbose_name="Номер ву", max_length=20, blank=True)
     driver_license_date = models.DateField(verbose_name="Дата ву", null=True, blank=True)
-    phone = models.CharField(verbose_name="Телефон", max_length=20, blank=True)
+    phone = models.CharField(verbose_name="Телефон", max_length=20, null=True, blank=True)
     number_auto = models.ForeignKey("Truck", on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
@@ -56,3 +56,4 @@ class Truck(models.Model):
     class Meta:
         verbose_name = 'Машина'
         verbose_name_plural = 'Машины'
+

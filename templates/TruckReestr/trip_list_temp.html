@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Рейсы</title>
+  </head>
+  <body>
+   {% block content %}
+    <div class="container-fluid">
+    <h2>Рейсы</h2>
+    <h2><a href="{% url 'tripnew' %}">Новый рейс</a></h2>
+
+    <table class="table table-bordered table-hover table-sm table-striped ">
+        <thead>
+    <tr >
+      <th scope="col">Дата погрузки</th>
+      <th scope="col">Время подачи</th>
+      <th scope="col">Место погрузки</th>
+      <th scope="col">Место выгрузки</th>
+      <th scope="col">Вид ТС</th>
+      <th scope="col">Цена рейса</th>
+    </tr>
+  </thead>
+        <tbody>
+    {% for trip in trips %}
+      <tr >
+{#          <td <a href="{{ trip.get_absolute_url }}"</a> </td>#}
+      <td>{{ trip.trip_date }}</td>
+      <td>{{ trip.trip_time }}</td>
+      <td>{{ trip.trip_from }}</td>
+      <td>{{ trip.trip_to}}</td>
+      <td align="center" >{{ trip.type_auto}}</td>
+      <td align="right" >{{ trip.trip_cost}}</td>
+      <td align="center" >{{ trip.truck}}</td>
+      <td>{{ trip.driver}}</td>
+
+    </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+    {% bootstrap_pagination lines url="/pagination?page=1" size="large" %}
+    </div>
+{% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <!-- Вариант 2: отдельные JS для Popper и Bootstrap -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
