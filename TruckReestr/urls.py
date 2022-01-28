@@ -7,7 +7,7 @@ from TruckReestr.views import AboutView, MyView, TripsListView, TripCreate, Trip
 
 urlpatterns = [
     path('about2/', AboutView.as_view()),
-    path('trips/', TripsListView.as_view(), name='trips'),
+    path('', TripsListView.as_view(), name='trips'),
     path('tripnew/', TripCreate.as_view(), name='tripnew'),
     path('trips/<int:pk>', TripDetailView.as_view(), name='TripDetailView'),
 

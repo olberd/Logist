@@ -25,8 +25,9 @@ class TripsListView(ListView):
 
 class TripCreate(CreateView):
     model = Trip
-    fields = ['trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', 'trip_cost', 'driver', 'truck',]
+    fields = ['trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', 'trip_cost', 'driver', 'truck', ]
     success_url = "/trips"
+
 
 class TripDetailView(DetailView):
     model = Trip

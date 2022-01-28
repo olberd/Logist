@@ -13,6 +13,7 @@ class Trip(models.Model):
     trip_cost = models.DecimalField(verbose_name="Цена рейса", max_digits=10, decimal_places=2)
     driver = models.ForeignKey("Driver", on_delete=models.CASCADE)
     truck = models.ForeignKey("Truck", on_delete=models.CASCADE)
+    docs = models.FileField(verbose_name="Док-ты", upload_to='media', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('TripDetailView', args=[self.id]) # args=[self.id]) #kwargs={'id': self.pk})

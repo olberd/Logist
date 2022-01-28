@@ -1,114 +1,63 @@
-{% load static %}
+{% extends 'TruckReestr/base.html' %}
+{#{% load static %}#}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Автобаза</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static './TruckReestr/assets/favicon.ico' %}" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static './TruckReestr/css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="d-flex" id="wrapper">
-            <!-- Sidebar-->
-            <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
-                <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
-                </div>
-            </div>
-            <!-- Page content wrapper-->
-            <div id="page-content-wrapper">
-                <!-- Top navigation-->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                                <li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#!">Action</a>
-                                        <a class="dropdown-item" href="#!">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- Page content-->
-                <div class="container-fluid">
-                    <div class="mt-4"></div>
-                        <table class="table table-bordered table-hover table-sm table-striped ">
+{% block content %}
+<!-- Page content-->
+<div class="container-fluid">
+    <div class="mt-4"></div>
+    <table class="table table-hover table-bordered">
         <thead>
-    <tr >
-      <th scope="col">Дата погрузки</th>
-      <th scope="col">Время подачи</th>
-      <th scope="col">Место погрузки</th>
-      <th scope="col">Место выгрузки</th>
-      <th scope="col">Вид ТС</th>
-      <th scope="col">Цена рейса</th>
-    </tr>
-  </thead>
+        <tr class="text-center">
+            {#                    <th scope="col">Дата погрузки</th>#}
+            <th scope="col">Дата погрузки</th>
+            <th scope="col">Время подачи</th>
+            <th scope="col">Место погрузки</th>
+            <th scope="col">Место выгрузки</th>
+            <th scope="col">Вид ТС</th>
+            <th scope="col">Цена рейса</th>
+            <th scope="col">Авто</th>
+            <th scope="col">Водитель</th>
+        </tr>
+        </thead>
         <tbody>
-    {% for trip in trips %}
-      <tr >
-{#          <td <a href="{{ trip.get_absolute_url }}"</a> </td>#}
-      <td>{{ trip.trip_date }}</td>
-      <td>{{ trip.trip_time }}</td>
-      <td>{{ trip.trip_from }}</td>
-      <td>{{ trip.trip_to}}</td>
-      <td align="center" >{{ trip.type_auto}}</td>
-      <td align="right" >{{ trip.trip_cost}}</td>
-      <td align="center" >{{ trip.truck}}</td>
-      <td>{{ trip.driver.surname}}</td>
+        {% for trip in trips %}
+            <tr>
+                {#  <td <a href="{{ trip.get_absolute_url }}"</a> </td>#}
+                <td>{{ trip.trip_date }}</td>
+                <td text-align="char">{{ trip.trip_time }}</td>
+                <td>{{ trip.trip_from }}</td>
+                <td>{{ trip.trip_to }}</td>
+                <td text-align="char">{{ trip.type_auto }}</td>
+                <td text-align="right">{{ trip.trip_cost }}</td>
+                <td text-align="center">{{ trip.truck }}</td>
+                <td>{{ trip.driver.surname }}</td>
 
-    </tr>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
 
 
-  </tbody>
-</table>
+        </tbody>
+    </table>
 
-                <div class="pagination">
+    <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">пред.</a>
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="?page={{ page_obj.next_page_number }}">след.</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
         {% endif %}
     </span>
+    </div>
 </div>
-                </div>
-            </div>
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="../../static/TruckReestr/js/scripts.js"></script>
-    </body>
-</html>
+{% endblock content %}
+
+
