@@ -1,6 +1,8 @@
 {% extends 'TruckReestr/base.html' %}
 {#{% load static %}#}
-
+{% block title %}
+    Рейсы
+{% endblock title %}
 {% block content %}
 <!-- Page content-->
 <div class="container-fluid">
@@ -23,14 +25,14 @@
         {% for trip in trips %}
             <tr>
                 {#  <td <a href="{{ trip.get_absolute_url }}"</a> </td>#}
-                <td>{{ trip.trip_date }}</td>
-                <td text-align="char">{{ trip.trip_time }}</td>
+                <td class="text-center">{{ trip.trip_date }}</td>
+                <td class="text-center">{{ trip.trip_time }}</td>
                 <td>{{ trip.trip_from }}</td>
                 <td>{{ trip.trip_to }}</td>
-                <td text-align="char">{{ trip.type_auto }}</td>
-                <td text-align="right">{{ trip.trip_cost }}</td>
-                <td text-align="center">{{ trip.truck }}</td>
-                <td>{{ trip.driver.surname }}</td>
+                <td class="text-center">{{ trip.type_auto }}</td>
+                <td class="text-end">{{ trip.trip_cost }}</td>
+                <td class="text-center">{{ trip.truck }}</td>
+                <td>{{ trip.driver.surname }} {{ trip.driver.name }}</td>
 
             </tr>
 
