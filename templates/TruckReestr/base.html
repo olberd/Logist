@@ -22,12 +22,12 @@
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">ЛОГО</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Рейсы</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Создать рейс</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Водители</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Машины</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Клиенты</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Настройки</a>
             </div>
         </div>
     {% endblock sidebar %}
@@ -63,8 +63,10 @@
             </nav>
         {% endblock navigation %}
         <!-- Page content-->
+    <div class="container-fluid">
         {% block content %}
         {% endblock content %}
+    </div>
     </div>
 </div>
 <!-- Bootstrap core JS-->

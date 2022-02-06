@@ -16,7 +16,7 @@ class Trip(models.Model):
     docs = models.FileField(verbose_name="Док-ты", upload_to='media', null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('TripDetailView', args=[self.id]) # args=[self.id]) #kwargs={'id': self.pk})
+        return reverse('TripDetailView', args=[self.id])  # args=[self.id]) #kwargs={'id': self.pk})
 
     class Meta:
         verbose_name = 'Рейс'

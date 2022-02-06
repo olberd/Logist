@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Рейс</title>
-</head>
-<body>
+{% extends 'TruckReestr/base.html' %}
 <h1> <a href="{% url 'trips' %}">Рейсы</a> </h1>
 <p>{{ object.trip_date }}</p>
 <p>{{ object.trip_time }}</p>

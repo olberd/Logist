@@ -1,13 +1,15 @@
 {#{% load static %}#}
 {% extends 'TruckReestr/base.html' %}
  Load the tag library
+
+{% block content %}
 {% load bootstrap5 %}
 
- Load CSS and JavaScript
+{# Load CSS and JavaScript#}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
- Display django.contrib.messages as Bootstrap alerts
+{# Display django.contrib.messages as Bootstrap alerts#}
 {% bootstrap_messages %}
 
 {# Display a form #}
@@ -20,3 +22,5 @@
     </button>
   {% endbuttons %}
 </form>
+
+{% endblock content %}
