@@ -1,5 +1,7 @@
 {% extends 'TruckReestr/base.html' %}
 <h1> <a href="{% url 'trips' %}">Рейсы</a> </h1>
+
+{% block content %}
 <p>{{ object.trip_date }}</p>
 <p>{{ object.trip_time }}</p>
 <p>{{ object.trip_from }}</p>
@@ -8,5 +10,4 @@
 <p>{{ object.trip_cost }}</p>
 <p>{{ object.driver }}</p>
 <p>{{ object.truck }}</p>
-</body>
-</html>
+{% endblock content %}

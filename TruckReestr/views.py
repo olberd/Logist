@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, ListView, CreateView, DetailView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, DeleteView, UpdateView
 from TruckReestr.models import Trip
 
 
@@ -26,8 +26,21 @@ class TripsListView(ListView):
 class TripCreate(CreateView):
     model = Trip
     fields = ['trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', 'trip_cost', 'driver', 'truck', ]
-    success_url = "/trips"
+    success_url = "/"
 
 
 class TripDetailView(DetailView):
     model = Trip
+
+
+class TripUpdateView(UpdateView):
+    model = Trip
+    fields = ['trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', 'trip_cost', 'driver', 'truck', ]
+    template_name = '../templates/TruckReestr/trip_form.html'
+    success_url = '/'
+
+
+class TripDeleteView(DeleteView):
+    model = Trip
+    success_url = '/'
+

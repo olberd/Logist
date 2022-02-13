@@ -11,7 +11,7 @@
 
 {# Display django.contrib.messages as Bootstrap alerts#}
 {% bootstrap_messages %}
-
+<div class="col-6">
 {# Display a form #}
 <form  method="POST" enctype="multipart/form-data" class="form">
   {% csrf_token %}
@@ -22,5 +22,5 @@
     </button>
   {% endbuttons %}
 </form>
-
+</div>
 {% endblock content %}
