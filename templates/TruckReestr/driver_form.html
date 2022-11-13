@@ -12,22 +12,15 @@
 {# Display django.contrib.messages as Bootstrap alerts#}
 {% bootstrap_messages %}
 <div class="col-6">
- Display a form
+{# Display a form #}
 <form  method="POST" enctype="multipart/form-data" class="form">
   {% csrf_token %}
-  {% bootstrap_form form  %}
+  {% bootstrap_form form %}
   {% buttons %}
     <button type="submit" class="btn btn-primary">
       Сохранить
     </button>
   {% endbuttons %}
 </form>
-
-    <form  method="POST" enctype="multipart/form-data">
-        <input type="text" name="fileTitle" placeholder="Enter a title">
-        <input type="file" name="uploadedFile">
-        {% csrf_token %}
-        <input type="submit" value="Upload">
-    </form>
 </div>
 {% endblock content %}

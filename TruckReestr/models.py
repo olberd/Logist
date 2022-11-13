@@ -1,7 +1,16 @@
 from django.db import models
-
 # Create your models here.
 from django.urls import reverse
+
+
+class Files(models.Model):
+    name = models.CharField(verbose_name='Название док-та', max_length=50)
+    doc = models.FileField(upload_to='documents', blank=True, null=True)
+    trip = models.ForeignKey('Trip', on_delete=models.CASCADE, blank=True, null=True )
+
+    class Meta:
+        verbose_name = 'Документ'
+        verbose_name_plural = 'Документы'
 
 
 class Trip(models.Model):
@@ -13,10 +22,9 @@ class Trip(models.Model):
     trip_cost = models.DecimalField(verbose_name="Цена рейса", max_digits=10, decimal_places=2)
     driver = models.ForeignKey("Driver", on_delete=models.CASCADE)
     truck = models.ForeignKey("Truck", on_delete=models.CASCADE)
-    docs = models.FileField(verbose_name="Док-ты", upload_to='media', null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('TripDetailView', args=[self.id])  # args=[self.id]) #kwargs={'id': self.pk})
+        return reverse('TripDetailView', args=[self.id])
 
     class Meta:
         verbose_name = 'Рейс'
@@ -25,25 +33,27 @@ class Trip(models.Model):
 
 
 class Driver(models.Model):
-    surname = models.CharField(verbose_name="Фамилия", max_length=100)
-    name = models.CharField(verbose_name="Имя", max_length=100)
-    second_name = models.CharField(verbose_name="Отчество", max_length=100, blank=True)
-    passport_ser = models.CharField(verbose_name="Серия паспорта", max_length=10, blank=True)
-    passport_no = models.CharField(verbose_name="Номер паспорта", max_length=10, blank=True)
-    passport_issued = models.CharField(verbose_name="Паспорт кем выдан", max_length=150, blank=True)
-    passport_date = models.DateField(verbose_name="дата выдачи", null=True, blank=True)
-    driver_license_ser = models.CharField(verbose_name="Серия ву", max_length=10, blank=True)
-    driver_license_no = models.CharField(verbose_name="Номер ву", max_length=20, blank=True)
-    driver_license_date = models.DateField(verbose_name="Дата ву", null=True, blank=True)
-    phone = models.CharField(verbose_name="Телефон", max_length=20, null=True, blank=True)
+    name = models.CharField(verbose_name="ФИО", max_length=100)
+    passport_ser = models.CharField(verbose_name="Серия паспорта", default='', max_length=10, blank=True)
+    passport_no = models.CharField(verbose_name="Номер паспорта", default='', max_length=10, blank=True)
+    passport_issued = models.CharField(verbose_name="Паспорт кем выдан", default='', max_length=150, blank=True)
+    passport_date = models.DateField(verbose_name="дата выдачи", default='', null=True, blank=True)
+    driver_license_ser = models.CharField(verbose_name="Серия ву", default='', max_length=10, blank=True)
+    driver_license_no = models.CharField(verbose_name="Номер ву", default='', max_length=20, blank=True)
+    driver_license_date = models.DateField(verbose_name="Дата ву", default='', null=True, blank=True)
+    phone = models.CharField(verbose_name="Телефон", max_length=20, default='', null=True, blank=True)
     number_auto = models.ForeignKey("Truck", on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.surname} {self.name}"
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('DriverDetailView', args=[self.id])
 
     class Meta:
         verbose_name = 'Водитель'
         verbose_name_plural = 'Водители'
+        ordering = ['name']
 
 
 class Truck(models.Model):

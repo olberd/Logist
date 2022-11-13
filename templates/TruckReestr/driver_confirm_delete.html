@@ -1,0 +1,13 @@
+{% extends 'TruckReestr/base.html' %}
+{% block content %}
+
+<form method="post">{% csrf_token %}
+
+    <p>{{ object.surname }}</p>
+    <p>{{ object.name }}</p>
+    <p>Удалить водителя?</p>
+
+
+    <input type="submit" value="Подтвердить">
+</form>
+{% endblock content %}
