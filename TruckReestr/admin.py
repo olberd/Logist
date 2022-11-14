@@ -4,10 +4,18 @@ from django.contrib import admin
 from TruckReestr.models import Trip, Driver, Truck, Files
 
 
+class FilesInline(admin.StackedInline):
+    model = Files
+    list_display = ('name', 'doc')
+    extra = 3
+
+
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
     list_display = ('trip_date', 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
     search_fields = ('trip_date', 'driver', 'truck',)
+    inlines = [FilesInline]
+
 
 
 @admin.register(Driver)
@@ -23,6 +31,5 @@ class TruckAdmin(admin.ModelAdmin):
     list_display = ('number_auto', 'brand_auto', 'type_auto',)
 
 
-@admin.register(Files)
-class FilesAdmin(admin.ModelAdmin):
-    list_display = ('name', 'doc')
+
+

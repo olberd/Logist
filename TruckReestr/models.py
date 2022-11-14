@@ -6,7 +6,10 @@ from django.urls import reverse
 class Files(models.Model):
     name = models.CharField(verbose_name='Название док-та', max_length=50)
     doc = models.FileField(upload_to='documents', blank=True, null=True)
-    trip = models.ForeignKey('Trip', on_delete=models.CASCADE, blank=True, null=True )
+    trip = models.ForeignKey('Trip', on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Документ'
