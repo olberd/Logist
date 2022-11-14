@@ -19,7 +19,7 @@ media
 .idea/**/shelf
 
 # AWS User-specific
-
+.idea
 # Generated files
 .idea/**/contentModel.xml
 
