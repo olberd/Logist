@@ -137,3 +137,5 @@ GitHub.sublime-settings
 .history
 /sqlite_GTZCPQBS.db
 /.idea/encodings.xml
+
+/TruckReestr/migrations

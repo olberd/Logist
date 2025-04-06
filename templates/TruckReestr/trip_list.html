@@ -6,7 +6,13 @@
 {#<div class="container-fluid">#}
 {% block content %}
     <!-- Page content-->
-    <div class="mt-4"></div>
+    <div class="d-flex float-end">
+        <a href="{% url "tripnew" %}">
+            <button type="button" class="btn btn-primary  mb-2" id="add-trip">Добавить рейс</button>
+        </a>
+    </div>
+    <div class="mt-2"></div>
+
     <table class="table table-hover table-bordered">
         <thead>
         <tr class="text-center text-wrap">
@@ -18,6 +24,7 @@
             <th scope="col">Вид ТС</th>
             <th scope="col">Цена рейса</th>
             <th scope="col">Авто</th>
+            <th scope="col">Клиент</th>
             <th scope="col">Водитель</th>
         </tr>
         </thead>
@@ -31,6 +38,7 @@
                 <td class="text-center">{{ trip.type_auto }}</td>
                 <td class="text-end">{{ trip.trip_cost }}</td>
                 <td class="text-center">{{ trip.truck }}</td>
+                <td class="text-center">{{ trip.company }}</td>
                 <td>{{ trip.driver.surname }} {{ trip.driver.name }}</td>
                 <td><a href="{% url 'tripupdate' trip.id %}" >Редакт.</a> <a href="{% url 'tripdelete' trip.id %}">Удалить</a></td>
 

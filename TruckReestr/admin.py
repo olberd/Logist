@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from TruckReestr.models import Trip, Driver, Truck, Files
+from TruckReestr.models import Trip, Driver, Truck, Files, Company
 
 
 class FilesInline(admin.StackedInline):
@@ -12,7 +12,7 @@ class FilesInline(admin.StackedInline):
 
 @admin.register(Trip)
 class TripAdmin(admin.ModelAdmin):
-    list_display = ('trip_date', 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost')
+    list_display = ('trip_date', 'trip_time', 'trip_from', 'trip_to', 'driver', 'truck', 'trip_cost', 'company')
     search_fields = ('trip_date', 'driver', 'truck',)
     inlines = [FilesInline]
 
@@ -28,6 +28,12 @@ class DriverAdmin(admin.ModelAdmin):
 @admin.register(Truck)
 class TruckAdmin(admin.ModelAdmin):
     list_display = ('number_auto', 'brand_auto', 'type_auto',)
+
+
+@admin.register(Company)
+class Company(admin.ModelAdmin):
+    list_display = ('name', 'name_full', 'is_our')
+
 
 
 

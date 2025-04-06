@@ -8,30 +8,6 @@ from TruckReestr.models import Trip, Driver, Files
 from .forms import TripForm, FilesForm, TripFormProbe, TripFormSet
 
 
-# def manage_trips(request, pk):
-#     trip_instance = get_object_or_404(Trip, pk=pk)
-#     # TripFormSet = formset_factory(TripForm, can_delete=True)
-#     FileFormSet = formset_factory(FilesForm, extra=2)
-#     if request.method == 'POST':
-#         # trip_formset = TripFormSet(request.POST, request.FILES, prefix='trips')
-#         trip_form = TripFormProbe(request.POST, prefix='trip')
-#         files_formset = FileFormSet(request.POST, request.FILES, prefix='files')
-#         if trip_form.is_valid() and files_formset.is_valid():
-#             # obj = Trip()
-#             # obj.driver = trip_form.cleaned_data['driver']
-#             trip_form.save(commit=False)
-#             for form in files_formset:
-#                 form.save()
-#             trip_form.save()
-#     else:
-#         trip_form = TripFormProbe(prefix='trips')
-#         files_formset = FileFormSet(prefix='files')
-#     return render(request, 'TruckReestr/manage_trips.html', {
-#         'trip_form': trip_form,
-#         'files_formset': files_formset,
-#     })
-
-
 def manage_trips(request, pk):
     # trip_instance = get_object_or_404(Trip)
     trip_instance = Trip.objects.get(id=pk)

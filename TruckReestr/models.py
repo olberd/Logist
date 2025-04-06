@@ -23,8 +23,10 @@ class Trip(models.Model):
     trip_to = models.CharField(verbose_name="Место выгрузки", max_length=255, null=True, blank=True)
     type_auto = models.CharField(verbose_name="Вид ТС", max_length=50, null=True, blank=True)
     trip_cost = models.DecimalField(verbose_name="Цена рейса", max_digits=10, decimal_places=2, null=True, blank=True)
-    driver = models.ForeignKey("Driver", on_delete=models.CASCADE, null=True, blank=True)
-    truck = models.ForeignKey("Truck", on_delete=models.CASCADE, null=True, blank=True)
+    driver = models.ForeignKey("Driver", verbose_name="Водитель", on_delete=models.CASCADE, null=True, blank=True)
+    truck = models.ForeignKey("Truck", verbose_name="Машина", on_delete=models.CASCADE, null=True, blank=True)
+    company = models.ForeignKey("Company", verbose_name="Клиент",  on_delete=models.CASCADE, null=True, blank=True,
+                                related_name='company')
 
     def get_absolute_url(self):
         return reverse('TripDetailView', args=[self.id])
@@ -76,5 +78,11 @@ class Company(models.Model):
     name = models.CharField(max_length=100, verbose_name="Клиент")
     name_full = models.CharField(max_length=255, verbose_name="Клиент")
     is_our = models.BooleanField(auto_created=False)
-    trips = models.ForeignKey("Trip", on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
 
