@@ -17,7 +17,6 @@ class TripAdmin(admin.ModelAdmin):
     inlines = [FilesInline]
 
 
-
 @admin.register(Driver)
 class DriverAdmin(admin.ModelAdmin):
     fields = ('name', 'passport_ser', 'passport_no', 'passport_issued', 'passport_date',

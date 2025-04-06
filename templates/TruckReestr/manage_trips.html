@@ -1,0 +1,31 @@
+{% extends 'TruckReestr/base.html' %}
+{% load static %}
+ Load the tag library
+
+{% block content %}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript#}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts#}
+{% bootstrap_messages %}
+<div class="col-6">
+
+    <form  method="POST" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form_trip %}
+
+        {{ formset.management_form }}
+          {% for form in formset %}
+              {% bootstrap_form form %}
+          {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+
+</div>
+{% endblock content %}
+
+
