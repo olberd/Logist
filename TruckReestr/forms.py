@@ -20,7 +20,7 @@ class FilesForm(ModelForm):
         }
 
 
-TripFormSet = inlineformset_factory(Trip, Files, fields=['name', 'doc'], extra=2)
+# TripFormSet = inlineformset_factory(Trip, Files, fields=['name', 'doc'], extra=2)
 
 
 class TripFormProbe(ModelForm):
