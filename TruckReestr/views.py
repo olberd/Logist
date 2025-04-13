@@ -12,27 +12,26 @@ def new_trip(request):
     TripFormSet = inlineformset_factory(Trip, Files, fields=['name', 'doc'], extra=1)
     if request.method == 'POST':
         form_trip = TripForm(request.POST) # , prefix="trip"
-        formset = TripFormSet(request.POST or None, request.FILES or None)
-        if formset.is_valid() and form_trip.is_valid():
+        formsets = TripFormSet(request.POST or None, request.FILES or None)
+        if formsets.is_valid() and form_trip.is_valid():
             trip = form_trip.save()
 
-            formset_instance = formset.save(commit=False)
-            for formset in formset_instance:
+            formsets = formsets.save(commit=False)
+            for formset in formsets:
                 formset.trip = trip
                 formset.save()
             return redirect(reverse('trips'))
     else:
         form_trip = TripForm()
-        formset = TripFormSet()
+        formsets = TripFormSet()
     return render(request, 'TruckReestr/manage_trips.html', {
         'form_trip': form_trip,
-        'formset': formset,
+        'formset': formsets,
     })
 
 
-def manage_trips(request, pk):
-    # trip_instance = get_object_or_404(Trip)
-    trip_instance = Trip.objects.get(id=pk)
+def manage_trips(request, trip_id):
+    trip_instance = get_object_or_404(Trip, id=trip_id)
     form_trip = TripForm(instance=trip_instance)
     TripFormSet = inlineformset_factory(Trip, Files, fields=['name', 'doc'], extra=1)
     if request.method == 'POST':

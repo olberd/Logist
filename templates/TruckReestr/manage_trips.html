@@ -18,10 +18,10 @@
         {% bootstrap_form form_trip %}
 
         {{ formset.management_form }}
-          {% for form in formset %}
-              {% bootstrap_form form %}
-          {% endfor %}
-
+        {% for form in formset %}
+            {% bootstrap_form form %}
+            <button class="btn btn-primary">Добавить файл</button>
+        {% endfor %}
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 

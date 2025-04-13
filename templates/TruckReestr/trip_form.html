@@ -10,13 +10,14 @@
 {% bootstrap_messages %}
 <div class="col-8">
 
-    {{ inlines.management_form }}
+    <form  method="POST" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {{ inlines.management_form }}
         {% for formset in inlines %}
             {% bootstrap_form formset %}
+            <button class="btn btn-primary mt-2">Добавить файл</button>
         {% endfor %}
-    <form  method="POST" enctype="multipart/form-data" class="form">
-      {% csrf_token %}
-        {% bootstrap_form form %}
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 </div>

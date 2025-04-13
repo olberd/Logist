@@ -21,7 +21,7 @@ urlpatterns = [
     path('drivers/detail/<int:pk>', DriverDetailView.as_view(), name='driver_detail'),
     path('driver/update/<int:pk>', DriverUpdateView.as_view(), name='driver_update'),
     path('driver/delete/<int:pk>', DriverDeleteView.as_view(), name='driver_delete'),
-    path('update/<int:pk>', views.manage_trips, name='tripupdate'),
+    path('update/<int:trip_id>', views.manage_trips, name='tripupdate'),
 
 
 

@@ -11,7 +11,8 @@ class TripForm(ModelForm):
 
 
 class FilesForm(ModelForm):
-    # file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    # doc = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
     class Meta:
         model = Files
         fields = '__all__'
