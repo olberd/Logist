@@ -8,8 +8,8 @@ class Files(models.Model):
     doc = models.FileField(upload_to='documents', blank=True, null=True)
     trip = models.ForeignKey('Trip', on_delete=models.CASCADE, blank=True, null=True, related_name='docs')
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
     class Meta:
         verbose_name = 'Документ'
@@ -85,4 +85,6 @@ class Company(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
+
+# TODO add our company
 

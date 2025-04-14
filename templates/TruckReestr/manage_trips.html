@@ -11,21 +11,68 @@
 
 {# Display django.contrib.messages as Bootstrap alerts#}
 {% bootstrap_messages %}
-<div class="col-6">
+    <div class="col-6">
 
-    <form  method="POST" enctype="multipart/form-data" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form_trip %}
+        <form  method="POST" enctype="multipart/form-data" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form_trip %}
 
-        {{ formset.management_form }}
-        {% for form in formset %}
-            {% bootstrap_form form %}
-            <button class="btn btn-primary">Добавить файл</button>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
+            {{ formset.management_form }}
+{#            <div id="formset">#}
+                {% for form in formset %}
+                    <div class="form-row">
+                        {% bootstrap_form form %}
+                        <button type="button" class="remove-form btn btn-primary mb-2">Удалить</button>
+                    </div>
+{#            </div>#}
+            {% endfor %}
 
-</div>
+            <button type="button" id="add-form" class="btn btn-primary">Добавить файл</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+
+    </div>
+    <script>
+        let formset = document.querySelectorAll(".form-row")
+        {#let container  = document.querySelector("#formset")#}
+        let container  = document.querySelector(".form")
+        let addButton = document.querySelector("#add-form")
+        let removeButton = document.querySelector(".remove-form")
+        let totalForms = document.querySelector("#id_docs-TOTAL_FORMS")
+        let formNum = formset.length-1
+
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = formset[0].cloneNode(true)
+            let formRegex = RegExp(`docs-(\\d){1}-`,'g')
+
+            formNum++
+            // TODO скопировать пустую форму
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `docs-${formNum}-`)
+            {#newForm.querySelectorAll('.label').forEach(el => el.value = '')#}
+            addButton.before(newForm)
+            totalForms.setAttribute('value', `${formNum+1}`)
+        }
+
+        container.addEventListener('click', function(event) {
+            // Проверяем, был ли клик по элементу с классом remove-form
+            if (event.target.classList.contains("remove-form")) {
+                // Получаем родительский элемент с классом form-row
+                const formRow = event.target.closest('.form-row');
+                // Удаляем найденный элемент
+                if (formRow) {
+                    formRow.remove();
+                    formNum--
+                    totalForms.setAttribute('value', String(formNum))
+                }
+            }
+            });
+    </script>
+
+
 {% endblock content %}
 
 

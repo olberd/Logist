@@ -6,8 +6,13 @@ from TruckReestr.models import Trip, Driver, Truck, Files, Company
 
 class FilesInline(admin.StackedInline):
     model = Files
-    list_display = ('name', 'doc')
+    list_display = ('doc',)
     extra = 3
+
+
+@admin.register(Files)
+class FilesAdmin(admin.ModelAdmin):
+    list_display = 'name', 'doc'
 
 
 @admin.register(Trip)
