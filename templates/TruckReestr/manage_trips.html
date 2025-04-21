@@ -1,63 +1,134 @@
 {% extends 'TruckReestr/base.html' %}
 {% load static %}
- Load the tag library
+Load the tag library
 
 {% block content %}
-{% load bootstrap5 %}
+    {% load bootstrap5 %}
 
-{# Load CSS and JavaScript#}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+    {# Load CSS and JavaScript#}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 
-{# Display django.contrib.messages as Bootstrap alerts#}
-{% bootstrap_messages %}
-    <div class="col-6">
+    {# Display django.contrib.messages as Bootstrap alerts#}
+    {% bootstrap_messages %}
+        <div class="col-10">
 
-        <form  method="POST" enctype="multipart/form-data" class="form">
+        <form method="POST" enctype="multipart/form-data" class="form">
             {% csrf_token %}
-            {% bootstrap_form form_trip %}
+{#            {% bootstrap_form form_trip %}#}
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label for="{{ form_trip.our_company_id }}"
+                           class="form-label">{{ form_trip.our_company.label }}</label>
+                    {{ form_trip.our_company }}
+                </div>
+                <div class="col">
+                    <label for="{{ form_trip.company_id }}" class="form-label">{{ form_trip.company.label }}</label>
+                    {{ form_trip.company }}
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label for="{{ form_trip.trip_date_id }}" class="form-label">{{ form_trip.trip_date.label }}</label>
+                    {{ form_trip.trip_date }}
+                </div>
+                <div class="col">
+                    <label for="{{ form_trip.trip_time_id }}" class="form-label">{{ form_trip.trip_time.label }}</label>
+                    {{ form_trip.trip_time }}
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col">
+                    <label for="{{ form_trip.trip_from_id }}" class="form-label">{{ form_trip.trip_from.label }}</label>
+                    {{ form_trip.trip_from }}
+                </div>
+                <div class="col">
+                    <label for="{{ form_trip.trip_to_id }}" class="form-label">{{ form_trip.trip_to.label }}</label>
+                    {{ form_trip.trip_to }}
+                </div>
+            </div>
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <label for="{{ form_trip.type_auto_id }}" class="form-label">{{ form_trip.type_auto.label }}</label>
+                        {{ form_trip.type_auto }}
+                    </div>
+                    <div class="col">
+                        <label for="{{ form_trip.truck_id }}" class="form-label">{{ form_trip.truck.label }}</label>
+                        {{ form_trip.truck }}
+                    </div>
+                </div>
+                <div class="row g-3 mb-3">
+                    <div class="col">
+                        <label for="{{ form_trip.driver_id }}" class="form-label">{{ form_trip.driver.label }}</label>
+                        {{ form_trip.driver }}
+                    </div>
+                </div>
+                <div class="row  mb-3">
+                        <div class="col">
+                            <label for="{{ form_trip.trip_cost_id }}"
+                                   class="form-label">{{ form_trip.trip_cost.label }}</label>
+                            {{ form_trip.trip_cost }}
+                        </div>
+                </div>
 
-            {{ formset.management_form }}
-{#            <div id="formset">#}
+                {{ formset.management_form }}
+                <input type="file" multiple="multiple" class="btn-primary">
+
                 {% for form in formset %}
                     <div class="form-row">
                         {% bootstrap_form form %}
-                        <button type="button" class="remove-form btn btn-primary mb-2">Удалить</button>
+                        <button type="button" class="remove-form btn btn-secondary mb-2">Удалить</button>
                     </div>
-{#            </div>#}
-            {% endfor %}
+                {% endfor %}
 
-            <button type="button" id="add-form" class="btn btn-primary">Добавить файл</button>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="button" id="add-form" class="btn btn-secondary">Добавить файл</button>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
 
     </div>
+
+
+    <template id="templ" class="form-row">
+        <div class="mb-3"><br><input type="file" name="docs-0-doc" class="form-control" title="" id="id_docs-0-doc">
+        </div>
+        <input type="hidden" name="docs-0-id" value="140" id="id_docs-0-id">
+        <div class="mb-3">
+            <div class="form-check"><input type="checkbox" name="docs-0-DELETE" class="form-check-input"
+                                           id="id_docs-0-DELETE"><label class="form-check-label"
+                                                                        for="id_docs-0-DELETE">Удалить</label></div>
+        </div>
+        <input type="hidden" name="docs-0-trip" value="83" id="id_docs-0-trip">
+        <button type="button" class="remove-form btn btn-primary mb-2">Удалить</button>
+    </template>
+
+
     <script>
         let formset = document.querySelectorAll(".form-row")
-        {#let container  = document.querySelector("#formset")#}
-        let container  = document.querySelector(".form")
+        let container = document.querySelector(".form")
         let addButton = document.querySelector("#add-form")
         let removeButton = document.querySelector(".remove-form")
         let totalForms = document.querySelector("#id_docs-TOTAL_FORMS")
-        let formNum = formset.length-1
+        let formNum = formset.length - 1
+        let templ = document.querySelector("#templ")
 
         addButton.addEventListener('click', addForm)
 
-        function addForm(e){
+        function addForm(e) {
             e.preventDefault()
 
             let newForm = formset[0].cloneNode(true)
-            let formRegex = RegExp(`docs-(\\d){1}-`,'g')
+            let formRegex = RegExp(`docs-(\\d){1}-`, 'g')
 
             formNum++
             // TODO скопировать пустую форму
             newForm.innerHTML = newForm.innerHTML.replace(formRegex, `docs-${formNum}-`)
-            {#newForm.querySelectorAll('.label').forEach(el => el.value = '')#}
+
             addButton.before(newForm)
-            totalForms.setAttribute('value', `${formNum+1}`)
+            console.log(newForm)
+            totalForms.setAttribute('value', `${formNum + 1}`)
         }
 
-        container.addEventListener('click', function(event) {
+        container.addEventListener('click', function (event) {
             // Проверяем, был ли клик по элементу с классом remove-form
             if (event.target.classList.contains("remove-form")) {
                 // Получаем родительский элемент с классом form-row
@@ -69,7 +140,7 @@
                     totalForms.setAttribute('value', String(formNum))
                 }
             }
-            });
+        });
     </script>
 
 

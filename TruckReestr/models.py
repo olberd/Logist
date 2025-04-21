@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Files(models.Model):
     name = models.CharField(verbose_name='Название док-та', blank=True, null=True, max_length=50)
-    doc = models.FileField(upload_to='documents', blank=True, null=True)
+    doc = models.FileField(upload_to='documents', verbose_name='', blank=True, null=True)
     trip = models.ForeignKey('Trip', on_delete=models.CASCADE, blank=True, null=True, related_name='docs')
 
     # def __str__(self):
@@ -27,6 +27,8 @@ class Trip(models.Model):
     truck = models.ForeignKey("Truck", verbose_name="Машина", on_delete=models.CASCADE, null=True, blank=True)
     company = models.ForeignKey("Company", verbose_name="Клиент",  on_delete=models.CASCADE, null=True, blank=True,
                                 related_name='company')
+    our_company = models.ForeignKey("OurCompany", verbose_name="Наша компания",  on_delete=models.CASCADE,
+                                    null=True, blank=True, related_name='our_company')
 
     def get_absolute_url(self):
         return reverse('TripDetailView', args=[self.id])
@@ -77,7 +79,6 @@ class Truck(models.Model):
 class Company(models.Model):
     name = models.CharField(max_length=100, verbose_name="Клиент")
     name_full = models.CharField(max_length=255, verbose_name="Клиент")
-    is_our = models.BooleanField(auto_created=False)
 
     def __str__(self):
         return self.name
@@ -88,3 +89,14 @@ class Company(models.Model):
 
 # TODO add our company
 
+
+class OurCompany(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Наша компания")
+    name_full = models.CharField(max_length=255, verbose_name="Наши компании")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Наша компания'
+        verbose_name_plural = 'Наши компании'

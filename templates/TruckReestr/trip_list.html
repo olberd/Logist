@@ -16,7 +16,8 @@
     <table class="table table-hover table-bordered">
         <thead>
         <tr class="text-center text-wrap">
-            {#                    <th scope="col">Дата погрузки</th>#}
+            <th scope="col">Перевозчик</th>
+            <th scope="col">Клиент</th>
             <th scope="col" style="width: 5%">Дата погрузки</th>
             <th scope="col" style="width: 5%">Время подачи</th>
             <th scope="col">Место погрузки</th>
@@ -24,13 +25,14 @@
             <th scope="col">Вид ТС</th>
             <th scope="col">Цена рейса</th>
             <th scope="col">Авто</th>
-            <th scope="col">Клиент</th>
             <th scope="col">Водитель</th>
         </tr>
         </thead>
         <tbody>
         {% for trip in trips %}
             <tr>
+                <td class="text-center">{{ trip.our_company }}</td>
+                <td class="text-center">{{ trip.company }}</td>
                 <td class="text-center">{{ trip.trip_date }}</td>
                 <td class="text-center">{{ trip.trip_time }}</td>
                 <td>{{ trip.trip_from }}</td>
@@ -38,7 +40,7 @@
                 <td class="text-center">{{ trip.type_auto }}</td>
                 <td class="text-end">{{ trip.trip_cost }}</td>
                 <td class="text-center">{{ trip.truck }}</td>
-                <td class="text-center">{{ trip.company }}</td>
+
                 <td>{{ trip.driver.surname }} {{ trip.driver.name }}</td>
                 <td><a href="{% url 'tripupdate' trip.id %}" >Редакт.</a> <a href="{% url 'tripdelete' trip.id %}">Удалить</a></td>
 

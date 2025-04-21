@@ -62,7 +62,7 @@ class MyView(View):
 
 
 class TripsListView(ListView):
-    paginate_by = 20
+    paginate_by = 30
     model = Trip
     context_object_name = 'trips'
 

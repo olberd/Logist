@@ -1,43 +1,37 @@
 from django import forms
+# from multiupload.fields import MultiFileField
 from django.forms import ModelForm, inlineformset_factory
 
 from .models import Trip, Files
 
 
+class MultiFileForm(forms.Form):
+    def save(self, trip, commit=True):
+        for file in self.cleaned_data['files']:
+            Files.objects.create(trip=trip, file=file)
+        return trip
+
+
 class TripForm(ModelForm):
     class Meta:
         model = Trip
-        fields = '__all__'
+        fields = 'our_company', 'company', 'trip_date', 'trip_time', 'trip_from', 'trip_to', 'type_auto', \
+            'trip_cost', 'driver', 'truck'
 
+    def __init__(self, *args, **kwargs):
+        super(TripForm, self).__init__(*args, **kwargs)
 
-# class MultipleFileInput(forms.ClearableFileInput):
-#     allow_multiple_selected = True
-#
-#
-# class MultipleFileField(forms.FileField):
-#     def __init__(self, *args, **kwargs):
-#         kwargs.setdefault("widget", MultipleFileInput())
-#         super().__init__(*args, **kwargs)
-#
-#     def clean(self, data, initial=None):
-#         single_file_clean = super().clean
-#         if isinstance(data, (list, tuple)):
-#             result = [single_file_clean(d, initial) for d in data]
-#         else:
-#             result = [single_file_clean(data, initial)]
-#         return result
-#
-#
-# class FileFieldForm(forms.Form):
-#     file_field = MultipleFileField()
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})
 
 
 class FilesForm(ModelForm):
 
     class Meta:
         model = Files
-        fields = '__all__'
+        fields = ('doc',)
         # widgets = {
+        # doc = forms.FileField(attrs={'title': 'Your name'})
         #     'doc': forms.FileField(attrs={'multiple': 'multiple'}),
         # }
 

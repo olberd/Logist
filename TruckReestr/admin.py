@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from TruckReestr.models import Trip, Driver, Truck, Files, Company
+from TruckReestr.models import Trip, Driver, Truck, Files, Company, OurCompany
 
 
 class FilesInline(admin.StackedInline):
@@ -37,8 +37,12 @@ class TruckAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class Company(admin.ModelAdmin):
-    list_display = ('name', 'name_full', 'is_our')
+    list_display = ('name', 'name_full')
 
+
+@admin.register(OurCompany)
+class OurCompany(admin.ModelAdmin):
+    list_display = ('name', 'name_full')
 
 
 
